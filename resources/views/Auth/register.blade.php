@@ -199,7 +199,7 @@
                 </div>
 
 
-                <a class="d-flex justify-center text-sm" href="lofin">
+                <a class="d-flex justify-center text-sm" href="login">
                     Already had an account?
                 </a>
 
