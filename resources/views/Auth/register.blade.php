@@ -212,7 +212,7 @@
 
 <div class="bg-base-100 border-t mt-5 p-5">
     <footer class="d-flex justify-content-center ">
-        <p>2024 Twbverify</p>
+        <p>2024 Oprimeverify</p>
     </footer>
 </div>
 
