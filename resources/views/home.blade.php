@@ -76,30 +76,53 @@
                         <div style="height:200px; width:100%; overflow-y: scroll;" class="p-2">
 
 
-                            @foreach ($services as $key => $value)
-                                <div class="row service-row">
-                                    @foreach ($value as $innerKey => $innerValue)
-                                        <div style="font-size: 11px" class="col-5 service-name">
-                                            {{ $innerValue->name }}
-                                        </div>
+                        @foreach ($services as $key => $value)
+    <div class="row service-row">
+        @foreach ($value as $innerKey => $innerValue)
+            <div style="font-size: 11px" class="col-5 service-name">
+                {{ $innerValue->name }}
+            </div>
 
-                                        <div style="font-size: 11px" class="col">
-                                            @php $cost = $get_rate * $innerValue->cost + $margin  @endphp
-                                            <strong>N{{ number_format($cost, 2) }}</strong>
-                                        </div>
+            <div style="font-size: 11px" class="col">
+                @php $cost = $get_rate * $innerValue->cost + $margin  @endphp
+                <strong>N{{ number_format($cost, 2) }}</strong>
+            </div>
 
-                                        <div class="col">
-                                            <a
-                                                href="/order-now?service={{ $key }}&price={{ $cost }}&cost={{ $innerValue->cost }}&name={{ $innerValue->name }}">
-                                                <i class="fa fa-shopping-bag"></i>
-                                            </a>
-                                        </div>
+            <div class="col">
+                <a href="javascript:void(0);" class="order-btn" 
+                   data-service="{{ $key }}"
+                   data-price="{{ $cost }}"
+                   data-cost="{{ $innerValue->cost }}"
+                   data-name="{{ $innerValue->name }}">
+                    <i class="fa fa-shopping-bag"></i>
+                </a>
+            </div>
 
+            <hr style="border-color: #cccccc" class="my-2">
+        @endforeach
+    </div>
+@endforeach
 
-                                        <hr style="border-color: #cccccc" class=" my-2">
-                                    @endforeach
-                                </div>
-                            @endforeach
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const orderButtons = document.querySelectorAll('.order-btn');
+
+        orderButtons.forEach(function (button) {
+            button.addEventListener('click', function (event) {
+                const target = event.target;
+                target.innerHTML = '<i class="fa fa-spinner fa-spin"></i>'; // Change button content to spinner
+                target.disabled = true; // Disable the button
+                const service = target.getAttribute('data-service');
+                const price = target.getAttribute('data-price');
+                const cost = target.getAttribute('data-cost');
+                const name = target.getAttribute('data-name');
+
+                // Redirect or handle order as needed
+                window.location.href = `/order-now?service=${service}&price=${price}&cost=${cost}&name=${name}`;
+            });
+        });
+    });
+</script>
 
 
                         </div>
